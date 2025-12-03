@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QListWidget, QInputDialog, QTabWidget, QFileDialog, 
 from PyQt6.QtGui import QPainter, QColor, QPen, QIcon, QAction, QPixmap
 from PyQt6.QtCore import pyqtSignal, QTimer, QRectF, Qt
 import database
+from modules.relief_generator import generate_relief
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -427,6 +428,8 @@ class GameOfLifeWindow(QMainWindow):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         main_layout = QVBoxLayout(central_widget)
+        self.seed = 1
+        self.altitude_map = generate_relief(width=200, height=150, seed=self.seed)
 
         self.grid_widget = GridWidget()
         # Разрешаем виджету отслеживать нажатия клавиш.
